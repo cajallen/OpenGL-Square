@@ -5,6 +5,7 @@
 This project is set up to compile with VS 2019. To set it up properly using this method, install `SDL2-2.0.14` in `C:/`, so that `C:/SDL2-2.0.14/include/` is the path to the headers. Otherwise, update the project settings to the SDL include and lib folders. 
 
 ## Operation
+The program can be run by running in `x64/Debug/Project1.exe` on Windows.
 When the project is run, it is set up to have 3 different images. The following operations can be performed on the images:
  - Translated, by dragging the mouse relatively centered in the square, represented by the hand cursor.
  - Scaled, by dragging the mouse in the corners of the square, represented by the four directional arrow cursor.
