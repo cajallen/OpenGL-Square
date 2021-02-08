@@ -1,4 +1,4 @@
-![](https://i.imgur.com/VzgdH13.mp4)
+<a href="https://i.imgur.com/VzgdH13.mp4" title="Video of Functionality"><img src="https://i.imgur.com/A7nwmxQ.png" alt="Video" /></a>
 
 ## Compiling
 This project is set up to compile with VS 2019. To set it up properly using this method, install `SDL2-2.0.14` in `C:/`, so that `C:/SDL2-2.0.14/include/` is the path to the headers. Otherwise, update the project settings to the SDL include and lib folders. 
