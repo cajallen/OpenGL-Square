@@ -73,11 +73,11 @@ class Image {
 	Line2D l1, l2, l3, l4;
 
 	// openGL
+	GLuint vao;
+	GLuint vbo;
 	GLuint vertexShader;
 	GLuint fragmentShader;
 	GLuint shaderProgram;
-	GLuint vao;
-	GLuint vbo;
 
 	// These are not the inital values, they are only non-empty to show the signs.
 	// Use init_p# to initialize values.

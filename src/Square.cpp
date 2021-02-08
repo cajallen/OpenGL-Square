@@ -43,16 +43,9 @@ bool done;
 
 void initialize() {
 	Image* image = new Image("images/goldy.ppm", Point2D(300, 600));
-	images.push_back(image);
-
 	Image* image2 = new Image("images/brick.ppm", Point2D(450, 300));
-	images.push_back(image2);
-
 	Image* image3 = new Image("images/test.ppm", Point2D(600, 600));
-	images.push_back(image3);
-
 	Image* image4 = new Image("images/smiles.ppm", Point2D(800, 500));
-	images.push_back(image4);
 }
 
 
@@ -173,16 +166,10 @@ void render() {
 
 
 void Image::render() {
-	// There is absolutely 0 chance that this is optimal.
 	glUseProgram(shaderProgram);
+	glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-	GLint text_loc = glGetUniformLocation(shaderProgram, "text");
-	glUniform1i(text_loc, id);
-
-	GLint brightness_loc = glGetUniformLocation(shaderProgram, "brightness");
-	glUniform1f(brightness_loc, rect_brightness);
-
-	// upload vertices to vbo
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
@@ -293,8 +280,6 @@ void Image::reset() {
 
 
 void keyPressed_r() {
-	cout << "The 'r' key was pressed" << endl;
-
 	for (Image* image : images) {
 		image->reset();
 	}
@@ -302,8 +287,6 @@ void keyPressed_r() {
 
 
 void keyPressed_f() {
-	cout << "The 'f' key was pressed" << endl;
-
 	fullscreen = !fullscreen;
 	SDL_SetWindowFullscreen(window, fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
 }
@@ -539,7 +522,16 @@ Image::Image(string file_name, Point2D pos) {
 	glEnableVertexAttribArray(texAttrib);
 	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(5 * sizeof(float)));
 
+	GLint text_loc = glGetUniformLocation(shaderProgram, "text");
+	glUniform1i(text_loc, id);
+
+	GLint brightness_loc = glGetUniformLocation(shaderProgram, "brightness");
+	glUniform1f(brightness_loc, rect_brightness);
+
+
 	updateRect();
+
+	images.push_back(this);
 }
 
 
@@ -603,11 +595,15 @@ int main(int argc, char* argv[]) {
 
 	initialize();
 
-	// Event Loop (Loop forever processing each event as fast as possible)
+	// Event Loop
 	done = false;
 	while (!done) {
 		update();
 		render();
+	}
+
+	for (Image* image : images) {
+		delete image;
 	}
 
 	// Clean Up
