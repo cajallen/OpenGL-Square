@@ -1,3 +1,4 @@
+(click for gif)
 <a href="https://i.imgur.com/VzgdH13.mp4" title="Video of Functionality"><img src="https://i.imgur.com/A7nwmxQ.png" alt="Video" /></a>
 
 ## Compiling
