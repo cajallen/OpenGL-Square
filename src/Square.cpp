@@ -235,8 +235,7 @@ void Image::mouseDragged(float m_x, float m_y) {
 			break;
 		} case Manip::Scale: {
 			disp1 = cur_mouse - rect_pos;
-			disp2.x = disp1.x*cos(rect_angle)-disp1.y*sin(rect_angle);
-			disp2.y = disp1.x*sin(rect_angle)+disp1.y*cos(rect_angle);
+			disp2 = transform(disp1, Rotator2D(-rect_angle, Point2D(0,0)));
 			rect_scale = fmax(fabs(disp2.x/init_p2.x), fabs(disp2.y/init_p2.y));
 			break;
 	 	} default: {
