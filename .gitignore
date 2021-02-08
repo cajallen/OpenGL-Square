@@ -2,4 +2,5 @@
 *.vcxproj.filters
 *.vcxproj.user
 .vs
-x64
+x64/Debug/Project1.tlog
+x64/Debug/Project1.log
