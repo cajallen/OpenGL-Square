@@ -59,6 +59,13 @@ struct Point2D{
   Point2D scale(float f){
     return Point2D(x*f,y*f);
   }
+  Point2D scale(float fx, float fy){
+    return Point2D(x*fx,y*fy);
+  }
+
+  float magnitude(){
+    return sqrt(x*x+y*y);
+  }
 
   Point2D(MultiVector mv);
 
@@ -141,7 +148,7 @@ Motor2D Translator2D(Dir2D displacement) {
   float dist = displacement.magnitude();
   displacement = displacement.normalized();
   if (dist > 0){
-    return Translator2D(dist,displacement.perp()); //TODO: Add perp to slides somewhere
+    return Translator2D(dist,displacement.perp());
   }
   return Motor2D(); //Identity transformation
 }

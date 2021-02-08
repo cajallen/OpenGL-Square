@@ -1,5 +1,4 @@
 //UMN CSCI 5607 2D Geometry Library Homework [HW0]
-//TODO: For the 18 functions below, replace their sub function with a working version that matches the desciption.
 
 #ifndef GEOM_LIB_H
 #define GEOM_LIB_H
