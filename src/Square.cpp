@@ -201,6 +201,10 @@ void mousewheel(float amount) {
 			image->rect_brightness = image->rect_brightness + amount * 0.05f;
 			image->rect_brightness = min(image->rect_brightness, 1.0f);
 			image->rect_brightness = max(image->rect_brightness, 0.0f);
+
+			glUseProgram(image->shaderProgram);
+			GLint brightness_loc = glGetUniformLocation(image->shaderProgram, "brightness");
+			glUniform1f(brightness_loc, image->rect_brightness);
 			return;
 		}
 	}
@@ -565,16 +569,6 @@ int main(int argc, char* argv[]) {
 	// Create a window (offsetx, offsety, width, height, flags)
 	window = SDL_CreateWindow("Project 1... A Square", 100, 100, screen_width, screen_height, SDL_WINDOW_OPENGL);
 
-	// The above window cannot be resized which makes some code slightly easier.
-	// Below show how to make a full screen window or allow resizing
-	// SDL_Window* window = SDL_CreateWindow("My OpenGL Program", 0, 0,
-	// screen_width, screen_height, SDL_WINDOW_FULLSCREEN|SDL_WINDOW_OPENGL);
-	// SDL_Window* window = SDL_CreateWindow("My OpenGL Program", 100, 100,
-	// screen_width, screen_height, SDL_WINDOW_RESIZABLE|SDL_WINDOW_OPENGL);
-	// SDL_Window* window = SDL_CreateWindow("My OpenGL
-	// Program",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,0,0,SDL_WINDOW_FULLSCREEN_DESKTOP|SDL_WINDOW_OPENGL);
-	// //Boarderless window "fake" full screen
-
 	// Create a context to draw in
 	SDL_GLContext context = SDL_GL_CreateContext(window);
 
@@ -589,9 +583,8 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
-	//// Allocate Textures (Created in Load Image) ///////
+	// Allocate Textures
 	glGenTextures(16, tex);
-	//// End Allocate Texture ///////
 
 	initialize();
 
